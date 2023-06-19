@@ -150,7 +150,7 @@ const editBookHandler = (request, h) => {
     return h
       .response({
         status: "fail",
-        message: "Gagal memperbarui  buku. Mohon isi nama buku",
+        message: "Gagal memperbarui buku. Mohon isi nama buku",
       })
       .code(400);
   }
