@@ -79,7 +79,21 @@ const addBookHandler = (request, h) => {
 };
 
 const getAllBooksHandler = (request, h) => {
-  const filteredBooks = [...books];
+  const { name, reading, finished } = request.query;
+  // Membuat variabel filteredBooks dengan hasil filter dari daftar books
+  const filteredBooks = books.filter((book) => {
+    const bookName = book.name.toLowerCase();
+
+    const isNameMatch = !name || bookName.includes(name.toLowerCase());
+
+    const isReadingMatch = !reading || book.reading === (reading === "1");
+
+    const isFinishedMatch = !finished || book.finished === (finished === "1");
+
+    // Mengembalikan true jika semua filter terpenuhi
+    return isNameMatch && isReadingMatch && isFinishedMatch;
+  });
+
   return h
     .response({
       status: "success",
